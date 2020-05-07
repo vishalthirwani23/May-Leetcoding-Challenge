@@ -1,0 +1,22 @@
+https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3321/
+
+Code:
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int maj,cnt=0;
+        for(int i=0;i<nums.size();i++){
+            if(!cnt){
+                cnt=1;
+                maj=nums[i];
+            }
+            else{
+                if(nums[i]==maj)
+                    cnt++;
+                else
+                    cnt--;
+            }
+        }
+        return maj;
+    }
+};
