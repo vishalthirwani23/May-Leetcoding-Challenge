@@ -1,0 +1,28 @@
+https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3322/
+
+Code:
+class Solution {
+public:
+    pair<TreeNode*,int> search_tree(TreeNode* par,TreeNode* root, int x,int height){
+        if(root==NULL)
+            return {NULL,0};
+            
+            if(root->val==x)
+            return {par,height};
+       auto l1=search_tree(root,root->left,x,height+1);
+       auto l2=search_tree(root,root->right,x,height+1);
+        return l1.first == NULL ? l2:l1;
+       
+        
+    }
+    bool isCousins(TreeNode* root, int x, int y) {
+          if(root->val == x || root->val ==y)
+            return 0;
+        
+         auto p1=search_tree(NULL,root,x,0);
+         auto p2=search_tree(NULL,root,y,0);
+        return p1.first!=p2.first && p1.second==p2.second;
+       
+        
+    }
+};
