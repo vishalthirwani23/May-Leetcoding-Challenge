@@ -1,0 +1,34 @@
+https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3326/
+Code:
+
+class Solution {
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+       if(image[sr][sc]==newColor)
+           return image;
+        int arr[]={0,1,0,-1,0};
+        queue<pair<int,int>> q;
+        q.push({sr,sc});
+        
+        while(!q.empty()){
+            pair<int,int> p=q.front();
+            int x=p.first, y=p.second;
+            q.pop();
+            if(image[x][y]==newColor){
+                
+                continue;
+            }
+           
+            for(int i=0;i<4;i++){
+                if(x+arr[i]<image.size() && x>=0 && y+arr[i+1]>=0 && y+arr[i+1]<image[0].size() && image[x+arr[i]][y+arr[i+1]]==image[x][y]){
+                    q.push({x+arr[i],y+arr[i+1]});
+                }
+            }
+            image[x][y]=newColor;
+        }
+        return image;
+    }
+};
+
+
+
