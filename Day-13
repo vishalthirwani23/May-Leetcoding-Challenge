@@ -1,0 +1,34 @@
+https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3328/
+Code:
+
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(0);
+        int n=num.length(),i=0;
+        string ans,ans1;
+        stack<char> s;
+        while(i<n){
+            while(!s.empty() && k && s.top()>num[i]){
+                s.pop();
+                k--;
+            }
+            s.push(num[i]);
+            i++;
+        }
+       while(k){
+           s.pop();
+           k--;
+       }
+        
+      while(!s.empty()){
+          ans=s.top()+ans;
+          s.pop();
+      }
+        while(ans.length() && ans[0]=='0'){
+            ans.erase(ans.begin());
+        }
+        return ans==""?"0":ans;
+    }
+};
