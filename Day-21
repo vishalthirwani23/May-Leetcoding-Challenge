@@ -1,0 +1,26 @@
+https://leetcode.com/explore/featured/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3336/
+code:
+
+class Solution {
+public:
+    int countSquares(vector<vector<int>>& matrix) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(0);
+        int m=matrix.size(),n=matrix[0].size(),ans=0;
+        vector<int> dp1(n+1,0);
+            for(int j=0;j<n;j++){
+                dp1[j+1]=matrix[0][j];
+                ans+=dp1[j+1];
+            }
+        for(int i=1;i<m;i++){
+            vector<int> dp2(n+1,0);
+            for(int j=0;j<n;j++){
+                if(matrix[i][j])
+               dp2[j+1]=1+min({dp2[j],dp1[j],dp1[j+1]});
+               ans+=dp2[j+1];
+            }    
+            dp1=dp2;   
+        }
+        return ans;
+    }
+};
