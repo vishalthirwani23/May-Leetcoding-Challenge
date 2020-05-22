@@ -1,0 +1,30 @@
+https://leetcode.com/explore/featured/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3337/
+Code:
+
+class Solution {
+public:
+    string frequencySort(string s) {
+       ios_base::sync_with_stdio(false);
+       cin.tie(0); 
+       map<char,int> m;
+        map<char,int>:: iterator it;
+       vector<pair<int,int>> v; 
+       string ans; 
+       int n=s.length();
+       for(int i=0;i<n;i++)
+           m[s[i]]++;
+       for( it=m.begin();it!=m.end() ;it++)
+          v.push_back({(*it).second,(*it).first});
+        sort(v.rbegin(),v.rend());
+        for(int j=0;j<v.size();j++)
+            for(int i=1;i<=v[j].first;i++)
+            ans+=v[j].second;
+        return ans;
+    }
+};
+
+
+
+ 
+           
+        
