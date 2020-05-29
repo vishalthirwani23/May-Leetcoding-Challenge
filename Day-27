@@ -1,0 +1,35 @@
+https://leetcode.com/explore/featured/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3342/
+Code:
+
+class Solution {
+public:
+     vector<vector<int>> adj;
+     vector<int> color;
+bool dfs(int x,int colors) {
+        if(color[x]!=-1) return color[x]==colors;
+        color[x]=colors;
+        for(int i=0;i<adj[x].size();i++)
+            if(dfs(adj[x][i],colors^1)==false) return false;
+        return true;
+}
+     
+bool possibleBipartition(int N, vector<vector<int>>& dislikes) {
+           
+           int n=dislikes.size();
+           adj.clear();
+           adj.resize(N);
+           color.resize(N,-1);
+    
+           for(int i=0;i<n;i++){
+               int x=dislikes[i][0],y=dislikes[i][1];
+               adj[x-1].push_back(y-1);
+               adj[y-1].push_back(x-1);
+           }
+    
+        for(int i=0;i<N;i++)
+            if(color[i]==-1 && !dfs(i,0))
+                    return false;
+            
+        return true;
+    }
+};
