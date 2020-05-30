@@ -1,0 +1,23 @@
+https://leetcode.com/explore/featured/card/may-leetcoding-challenge/538/week-5-may-29th-may-31st/3345/
+Code:
+
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int K) {
+        priority_queue<pair<int,int>> pq;
+            vector<vector<int>> ans;
+         for(int i=0;i<K;i++)
+             pq.push({points[i][0]*points[i][0] + points[i][1]*points[i][1],i});
+        for(int i=K;i<points.size();i++){
+            if(points[i][0]*points[i][0] + points[i][1]*points[i][1]<pq.top().first){
+                pq.pop();
+                pq.push({points[i][0]*points[i][0] + points[i][1]*points[i][1],i});
+            }
+        }
+        while(!pq.empty()){
+            ans.push_back(points[pq.top().second]);
+            pq.pop();
+        }
+        return ans;
+    }
+};
